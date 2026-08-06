@@ -73,7 +73,6 @@ jobs:
         run: |
           mkdir -p _site/history
           cp reports/weekly/latest.html _site/index.html
-          cp CNAME _site/CNAME
           find reports/weekly -name '*-agent-open-source-ranking.html' -exec cp {} _site/history/ \;
           touch _site/.nojekyll
 

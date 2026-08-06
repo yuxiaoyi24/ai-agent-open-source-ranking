@@ -2,7 +2,7 @@
 
 这是一套面向 AI Agent 应用架构师的开源技术地图。重点不是罗列所有“能做 Agent”的框架，而是拆解 Agent 系统的核心技术层，识别每层最值得研究的开源实现。
 
-在线版本：[AI Agent 技术开源周榜](https://agentstack.xiaoyi-ai.com/)
+在线版本：[AI Agent 技术开源周榜](https://yuxiaoyi24.github.io/ai-agent-open-source-ranking/)
 
 ## 研究入口
 
