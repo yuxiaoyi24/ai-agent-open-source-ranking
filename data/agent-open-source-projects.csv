@@ -1,0 +1,106 @@
+module,project,repo,stars_2026_08_05,priority,license,kind,tags,architect_note
+Agent Runtime,LangGraph,https://github.com/langchain-ai/langgraph,38902,P0,MIT,Agent-native,state;checkpoint;interrupt;streaming,有状态可恢复 Agent Runtime 的首选源码样本
+Agent Runtime,OpenAI Agents SDK Python,https://github.com/openai/openai-agents-python,28388,P0,MIT,Agent-native,loop;handoff;guardrail;trace,用最小抽象观察 Agent loop 和 handoff
+Agent Runtime,OpenAI Agents SDK JS,https://github.com/openai/openai-agents-js,3530,P1,MIT,Agent-native,typescript;voice;handoff,研究 JS 和 voice agent 路线
+Agent Runtime,Google ADK Python,https://github.com/google/adk-python,21007,P0,Apache-2.0,Agent-native,session;artifact;eval;deployment;A2A,企业 Agent 生命周期覆盖完整
+Agent Runtime,Microsoft Agent Framework,https://github.com/microsoft/agent-framework,12596,P0,需复核,Agent-native,python;dotnet;workflow;deployment,Microsoft 新统一路线需与 AutoGen/SK 对照
+Agent Runtime,AutoGen,https://github.com/microsoft/autogen,60229,P1,CC-BY-4.0,Agent-native,multi-agent;message;runtime,历史影响大但需核验与新 Agent Framework 的演进关系
+Agent Runtime,CrewAI,https://github.com/crewAIInc/crewAI,56633,P1,MIT,Agent-native,crew;role;task;flow,角色协作和 Flow 双层抽象
+Agent Runtime,PydanticAI,https://github.com/pydantic/pydantic-ai,19061,P1,MIT,Agent-native,typed-output;dependency;test,类型化工具和结构化输出
+Agent Runtime,Semantic Kernel,https://github.com/microsoft/semantic-kernel,28419,P1,MIT,Agent-native,plugin;filter;connector;enterprise,企业集成与插件过滤器
+Agent Runtime,Agno,https://github.com/agno-agi/agno,41577,P1,Apache-2.0,Agent-native,agent;team;knowledge;platform,Agent 到平台管理的一体化实现
+Agent Runtime,Mastra,https://github.com/mastra-ai/mastra,26925,P1,需复核,Agent-native,typescript;workflow;eval;observability,TypeScript Agent 工程栈
+Agent Runtime,Strands Harness SDK,https://github.com/strands-agents/harness-sdk,6796,P1,需复核,Agent-native,harness;python;typescript;cloud,原 sdk-python 已重定向到 harness-sdk
+Multi-Agent,CAMEL,https://github.com/camel-ai/camel,17544,P1,需复核,Agent-native,role-playing;society;scaling,多 Agent 社会与规模化研究
+Multi-Agent,AgentScope,https://github.com/agentscope-ai/agentscope,28577,P1,需复核,Agent-native,multi-agent;observability;runtime,国内多 Agent Runtime 代表
+Multi-Agent,MetaGPT,https://github.com/FoundationAgents/MetaGPT,69665,P2,MIT,Agent-application,software-process;role;artifact,以角色和中间产物模拟软件组织
+Durable Execution,Temporal,https://github.com/temporalio/temporal,22102,P0,MIT,Supporting,event-history;replay;retry;timer,验证状态恢复与业务副作用一致性
+Durable Execution,Restate,https://github.com/restatedev/restate,4253,P1,需复核,Supporting,durable-function;journal;virtual-object,轻量 durable execution 路线
+Durable Execution,DBOS Transact Python,https://github.com/dbos-inc/dbos-transact-py,1513,P1,MIT,Supporting,database;transaction;workflow,数据库支撑的 Python 持久化工作流
+Context Manager,context-mode,https://github.com/mksglu/context-mode,19628,P0,需复核,Agent-native,token;compression;tool-output;MCP;hooks,独立 Context Manager 的直接样本
+Context Manager,OpenViking,https://github.com/volcengine/OpenViking,27925,P0,AGPL-3.0,Agent-native,context-database;memory;knowledge;skills,统一 Memory/Knowledge/Skills 的 Context Database
+Context Manager,Aider,https://github.com/Aider-AI/aider,47945,P0,Apache-2.0,Agent-application,repo-map;token-budget;code-context,代码图和 token 预算的成熟实现
+Context Manager,Continue,https://github.com/continuedev/continue,35323,P1,Apache-2.0,Agent-application,context-provider;index;rules;IDE,IDE 场景上下文装配
+Context Manager,TrustGraph,https://github.com/trustgraph-ai/trustgraph,2431,P2,Apache-2.0,Agent-native,ontology;context-graph;deterministic,本体和 Context Graph 路线
+Agent Memory,Mem0,https://github.com/mem0ai/mem0,62544,P0,Apache-2.0,Agent-native,extraction;scope;vector;graph,通用 Agent Memory Layer
+Agent Memory,Letta,https://github.com/letta-ai/letta,24092,P0,Apache-2.0,Agent-native,stateful-agent;core-memory;archival-memory,上下文自编辑与有状态 Agent
+Agent Memory,Cognee,https://github.com/topoteretes/cognee,29781,P0,Apache-2.0,Agent-native,knowledge-graph;long-term-memory;self-hosted,知识图谱驱动长期记忆
+Agent Memory,MemOS,https://github.com/MemTensor/MemOS,10591,P1,Apache-2.0,Agent-native,memory-os;hybrid-retrieval;skill-reuse,自演进 Memory OS 路线
+Agent Memory,LangMem,https://github.com/langchain-ai/langmem,1596,P1,MIT,Agent-native,memory-manager;background-memory;langgraph,与 LangGraph 结合的 memory manager
+Agent Memory,Zep,https://github.com/getzep/zep,4809,P1,Apache-2.0,Agent-native,temporal-graph;memory;integration,当前公开仓库偏示例集成需核验开源边界
+Agent Memory,agentmemory,https://github.com/rohitg00/agentmemory,26555,P2,Apache-2.0,Agent-native,coding-agent;persistent-memory;benchmark,增长快且 benchmark 声明需复现
+Knowledge RAG,LlamaIndex,https://github.com/run-llama/llama_index,51383,P1,MIT,Agent-native,ingestion;index;retriever;document-agent,文档和数据 Agent 基础栈
+Knowledge RAG,Haystack,https://github.com/deepset-ai/haystack,26111,P1,Apache-2.0,Agent-native,pipeline;retrieval;routing;memory,显式可控的 Context/RAG Pipeline
+Knowledge RAG,RAGFlow,https://github.com/infiniflow/ragflow,86845,P1,Apache-2.0,Full-platform,document-parsing;RAG;agent,完整 RAG 工程链和 Context Layer
+Knowledge RAG,GraphRAG,https://github.com/microsoft/graphrag,35249,P1,MIT,Agent-native,knowledge-graph;global-search;local-search,图谱社区摘要与检索
+Knowledge RAG,LightRAG,https://github.com/HKUDS/LightRAG,38517,P1,MIT,Agent-native,graph-rag;incremental;retrieval,轻量图 RAG 和增量更新
+Agent Skills,Agent Skills Specification,https://github.com/agentskills/agentskills,23851,P0,Apache-2.0,Specification,SKILL.md;progressive-disclosure;portability,Skill 可移植规范
+Agent Skills,Anthropic Skills,https://github.com/anthropics/skills,166288,P0,需复核,Reference,skills;scripts;assets;examples,官方 Skill 样本库
+Agent Skills,Superpowers,https://github.com/obra/superpowers,266622,P0,MIT,Reference,skills;methodology;coding-agent,Skill 驱动的软件工程方法
+Agent Skills,Composio,https://github.com/ComposioHQ/composio,29537,P1,MIT,Agent-native,toolkit;tool-search;auth;context;sandbox,工具生态和认证执行一体化
+Agent Skills,agent-skills,https://github.com/addyosmani/agent-skills,81680,P1,MIT,Reference,coding;engineering;skills,生产级编码 Skill 样本
+Agent Skills,mattpocock skills,https://github.com/mattpocock/skills,203577,P2,MIT,Reference,engineering;skills,高传播度内容样本不等于 Runtime
+MCP,MCP Specification,https://github.com/modelcontextprotocol/modelcontextprotocol,8861,P0,需复核,Specification,protocol;lifecycle;capability;transport,MCP 规范与文档主仓库
+MCP,MCP Python SDK,https://github.com/modelcontextprotocol/python-sdk,23888,P0,需复核,Agent-native,client;server;session;transport,Python 官方 SDK
+MCP,MCP TypeScript SDK,https://github.com/modelcontextprotocol/typescript-sdk,13067,P0,需复核,Agent-native,client;server;session;transport,TypeScript 官方 SDK
+MCP,MCP Servers,https://github.com/modelcontextprotocol/servers,89218,P1,需复核,Reference,reference-server;ecosystem,生态入口不代表每个 Server 均成熟
+MCP,MCP Registry,https://github.com/modelcontextprotocol/registry,7103,P1,需复核,Agent-native,registry;metadata;publish;discovery,Server 注册发布与发现
+MCP,MCP Inspector,https://github.com/modelcontextprotocol/inspector,10583,P1,需复核,Tooling,test;debug;capability,MCP Server 调试测试
+MCP,ToolHive,https://github.com/stacklok/toolhive,1989,P0,Apache-2.0,Agent-native,runtime;isolation;policy;management,企业级 MCP Server 运行治理
+MCP,MCP Context Forge,https://github.com/IBM/mcp-context-forge,4243,P0,Apache-2.0,Agent-native,gateway;registry;proxy;guardrail;A2A,企业工具网关和统一治理
+MCP,Open Connector,https://github.com/oomol-lab/open-connector,4266,P1,Apache-2.0,Agent-native,OAuth;SaaS;MCP;OpenAPI,1000+ SaaS 的认证连接网关
+MCP,MetaMCP,https://github.com/metatool-ai/metamcp,2578,P2,MIT,Agent-native,aggregator;orchestrator;middleware;gateway,MCP 聚合与中间件
+Agent Protocol,A2A,https://github.com/a2aproject/A2A,25193,P0,Apache-2.0,Specification,agent-card;task;message;artifact;auth,Agent 到 Agent 的远程互操作
+Agent Protocol,AG-UI,https://github.com/ag-ui-protocol/ag-ui,15133,P0,MIT,Specification,event;state;tool;HITL;frontend,Agent 到 UI 的事件协议
+Agent Protocol,MCP Apps,https://github.com/modelcontextprotocol/ext-apps,2680,P1,需复核,Specification,embedded-ui;MCP;app,MCP Server 提供嵌入式 UI
+Sandbox,OpenSandbox,https://github.com/opensandbox-group/OpenSandbox,12348,P0,Apache-2.0,Agent-native,runtime;isolation;performance;extension,Agent 原生 Sandbox Runtime
+Sandbox,E2B,https://github.com/e2b-dev/E2B,13258,P0,Apache-2.0,Agent-native,cloud-sandbox;template;tool,企业 Agent 云端安全执行环境
+Sandbox,Daytona,https://github.com/daytonaio/daytona,72052,P0,需复核,Agent-native,elastic;code-execution;infrastructure,AI 生成代码的安全弹性执行
+Sandbox,OpenShell,https://github.com/NVIDIA/OpenShell,7988,P0,Apache-2.0,Agent-native,safe-runtime;private;autonomous-agent,NVIDIA 自主 Agent 安全 Runtime
+Sandbox,sandbox-runtime,https://github.com/anthropic-experimental/sandbox-runtime,4851,P1,Apache-2.0,Agent-native,filesystem;network;OS,无完整容器的 OS 级限制
+Sandbox,Kubernetes Agent Sandbox,https://github.com/kubernetes-sigs/agent-sandbox,3403,P1,Apache-2.0,Agent-native,kubernetes;stateful;singleton;workload,K8s 上 Agent 隔离工作负载
+Sandbox,CubeSandbox,https://github.com/TencentCloud/CubeSandbox,10896,P1,需复核,Agent-native,concurrent;lightweight;secure,国内高并发轻量 Sandbox 路线
+Sandbox,Flue,https://github.com/withastro/flue,7697,P2,Apache-2.0,Agent-native,sandbox;agent-framework,新兴 Sandbox Agent Framework
+Sandbox,Firecracker,https://github.com/firecracker-microvm/firecracker,35879,Infrastructure,需复核,Supporting,microVM;isolation;startup,Sandbox 底层 microVM 参考
+Sandbox,gVisor,https://github.com/google/gvisor,18980,Infrastructure,需复核,Supporting,application-kernel;syscall;container,Sandbox 底层系统调用隔离参考
+Browser Computer Use,Browser-use,https://github.com/browser-use/browser-use,107893,P0,MIT,Agent-native,browser;DOM;vision;action,浏览器 Agent 主流实现
+Browser Computer Use,Stagehand,https://github.com/browserbase/stagehand,23730,P0,MIT,Agent-native,act;extract;observe;playwright,确定性浏览器 API 与 Agent 结合
+Browser Computer Use,CUA,https://github.com/trycua/cua,20929,P0,MIT,Agent-native,computer-use;cross-OS;fleet;benchmark,Computer Use 驱动和训练评测平台
+Browser Computer Use,Steel Browser,https://github.com/steel-dev/steel-browser,7423,P1,Apache-2.0,Agent-native,browser-api;sandbox;infrastructure,开源 Browser API 和 Sandbox
+Browser Computer Use,BrowserGym,https://github.com/ServiceNow/BrowserGym,1303,P1,需复核,Agent-native,environment;benchmark;web-task,浏览器任务环境与评测
+Model Gateway,LiteLLM,https://github.com/BerriAI/litellm,55575,P0,需复核,Agent-native,gateway;routing;budget;fallback;logging,多模型统一入口与治理
+Model Gateway,TensorZero,https://github.com/tensorzero/tensorzero,11726,P0,需复核,Agent-native,gateway;observability;eval;optimization,网关和评测优化闭环
+Model Gateway,Portkey Gateway,https://github.com/Portkey-AI/gateway,12644,P1,MIT,Agent-native,gateway;guardrail;routing,高性能多模型网关
+Model Gateway,OmniRoute,https://github.com/diegosouzapw/OmniRoute,39801,P2,MIT,Agent-native,gateway;quota;compression;MCP;A2A,增长快且功能宽需持续复核
+Model Gateway,Plano,https://github.com/katanemo/plano,6956,P2,Apache-2.0,Agent-native,proxy;data-plane;routing;policy,Agentic App Data Plane
+Observability,Langfuse,https://github.com/langfuse/langfuse,32531,P0,需复核,Agent-native,trace;prompt;dataset;eval;cost,自托管 AI Engineering 平台
+Observability,Phoenix,https://github.com/Arize-ai/phoenix,10902,P0,需复核,Agent-native,OpenTelemetry;trace;eval;RAG,OTel 路线的 Agent 可观测评测
+Observability,OpenLLMetry,https://github.com/traceloop/openllmetry,7355,P1,Apache-2.0,Agent-native,OpenTelemetry;instrumentation;trace,LLM/Agent OTel instrumentation
+Observability,Opik,https://github.com/comet-ml/opik,21114,P1,Apache-2.0,Agent-native,trace;eval;monitoring,观测评测一体化
+Observability,RagaAI Catalyst,https://github.com/raga-ai-hub/RagaAI-Catalyst,16142,P1,Apache-2.0,Agent-native,multi-agent;timeline;execution-graph;eval,多 Agent 执行图和诊断
+Observability,AgentOps,https://github.com/AgentOps-AI/agentops,5750,P1,MIT,Agent-native,monitor;cost;benchmark;integration,Agent 监控 SDK
+Observability,OpenLIT,https://github.com/openlit/openlit,2669,P1,需复核,Agent-native,OpenTelemetry;GPU;guardrail;eval;vault,AI Engineering 多治理能力
+Evaluation,DeepEval,https://github.com/confident-ai/deepeval,17408,P0,Apache-2.0,Agent-native,pytest;metric;dataset;CI,LLM/Agent Evaluation Framework
+Evaluation,Promptfoo,https://github.com/promptfoo/promptfoo,23934,P0,MIT,Agent-native,matrix;red-team;CI;RAG,声明式评测与安全扫描
+Evaluation,OpenEvals,https://github.com/langchain-ai/openevals,1150,P1,MIT,Agent-native,evaluator;trajectory;LLM-app,现成 Evaluator 和轨迹评测
+Evaluation,Inspect AI,https://github.com/UKGovernmentBEIS/inspect_ai,2474,P1,MIT,Agent-native,task;solver;sandbox;reproducible,可复现评测任务框架
+Evaluation,Giskard OSS,https://github.com/Giskard-AI/giskard-oss,5737,P1,Apache-2.0,Agent-native,test;risk;LLM-agent,Agent Evaluation 与 Testing
+Evaluation,SWE-bench,https://github.com/SWE-bench/SWE-bench,5568,P1,需复核,Benchmark,software-issue;coding-agent;benchmark,真实代码 Issue 基准
+Security,SkillSpector,https://github.com/NVIDIA/SkillSpector,14190,P0,Apache-2.0,Agent-native,skill;MCP;prompt-injection;exfiltration;supply-chain,Agent Skill 供应链安全
+Security,PyRIT,https://github.com/microsoft/PyRIT,4243,P0,MIT,Agent-native,red-team;attack;orchestration;risk,生成式 AI 风险识别与自动红队
+Security,NeMo Guardrails,https://github.com/NVIDIA-NeMo/Guardrails,6874,P1,需复核,Agent-native,programmable-rail;dialog;retrieval;execution,可编程 Guardrail
+Security,Invariant,https://github.com/invariantlabs-ai/invariant,438,P2,Apache-2.0,Agent-native,trace-policy;runtime-guardrail,近期活跃度需继续复核
+Identity Authorization,OpenFGA,https://github.com/openfga/openfga,5544,P0,Apache-2.0,Supporting,Zanzibar;relationship;permission,Agent/Skill/Tool/Resource 关系授权
+Identity Authorization,Logto,https://github.com/logto-io/logto,14283,P0,需复核,Supporting,OIDC;OAuth2.1;multi-tenant;RBAC,AI App 身份认证与授权底座
+Identity Authorization,Casdoor,https://github.com/casdoor/casdoor,14123,P1,Apache-2.0,Supporting,IAM;MCP;gateway;OAuth;OIDC,Agent-first IAM 与网关
+HITL UI,CopilotKit,https://github.com/CopilotKit/CopilotKit,36463,P0,MIT,Agent-native,frontend;generative-UI;AG-UI,Agent 前端和 AG-UI 实现
+HITL UI,assistant-ui,https://github.com/assistant-ui/assistant-ui,11411,P1,MIT,Agent-native,react;chat;runtime,React Agent UI 组件库
+HITL UI,HumanLayer,https://github.com/humanlayer/humanlayer,11196,P1,需复核,Agent-application,HITL;coding-agent;context,复杂编码任务的人机协作样本
+Harness Platform,Codex,https://github.com/openai/codex,103979,P0,需复核,Agent-application,loop;context;tool;permission;sandbox;subagent,完整 Coding Agent Harness 源码样本
+Harness Platform,OpenHands,https://github.com/OpenHands/OpenHands,83136,P0,需复核,Agent-application,runtime;sandbox;trajectory;eval,软件 Agent 执行与评测
+Harness Platform,OpenCode,https://github.com/anomalyco/opencode,193427,P0,需复核,Agent-application,TUI;session;tool;permission,终端 Agent 架构参考
+Harness Platform,DeerFlow,https://github.com/bytedance/deer-flow,79309,P0,MIT,Agent-application,long-horizon;sandbox;memory;skill;subagent,长任务 SuperAgent 的完整拼装
+Harness Platform,Dify,https://github.com/langgenius/dify,151363,P1,Custom,Full-platform,control-plane;workflow;RAG;tool;release,企业 Agent 控制面与应用平台
+Harness Platform,Hermes Agent,https://github.com/NousResearch/hermes-agent,225589,P1,MIT,Agent-application,personal-agent;skill;terminal;memory,长期状态与可成长个人 Agent
+Harness Platform,herdr,https://github.com/herdrdev/herdr,24436,P2,Apache-2.0,Agent-native,coding-agent;runtime,增长快的新 Coding Agent Runtime
+Harness Platform,Paperclip,https://github.com/paperclipai/paperclip,75629,P2,MIT,Full-platform,control-plane;agent-management;work,工作场景 Agent 管理控制面

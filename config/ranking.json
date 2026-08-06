@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "timezone": "Asia/Shanghai",
+  "top_n": 5,
+  "baseline_date": "2026-08-05",
+  "weights": {
+    "composite_with_history": {
+      "architecture": 0.30,
+      "popularity": 0.20,
+      "weekly_star_delta": 0.20,
+      "weekly_growth_rate": 0.10,
+      "activity": 0.15,
+      "health": 0.05
+    },
+    "composite_without_history": {
+      "architecture": 0.40,
+      "popularity": 0.35,
+      "activity": 0.20,
+      "health": 0.05
+    },
+    "momentum": {
+      "architecture": 0.15,
+      "popularity": 0.10,
+      "weekly_star_delta": 0.35,
+      "weekly_growth_rate": 0.20,
+      "activity": 0.15,
+      "health": 0.05
+    }
+  },
+  "modules": {
+    "Agent Runtime": {
+      "label": "Agent Runtime / SDK",
+      "query": "\"agent runtime\" in:name,description stars:>500 archived:false",
+      "keywords": ["agent", "runtime", "framework", "sdk", "orchestration"]
+    },
+    "Durable Execution": {
+      "label": "Durable Execution",
+      "query": "\"durable workflow\" agent in:name,description stars:>100 archived:false",
+      "keywords": ["durable", "workflow", "replay", "retry", "execution"]
+    },
+    "Context Manager": {
+      "label": "Context Manager",
+      "query": "context agent in:name,description stars:>200 archived:false",
+      "keywords": ["context", "token", "compression", "retrieval", "agent"]
+    },
+    "Agent Memory": {
+      "label": "Agent Memory",
+      "query": "\"agent memory\" in:name,description stars:>500 archived:false",
+      "keywords": ["memory", "persistent", "long-term", "agent", "knowledge graph"]
+    },
+    "Knowledge RAG": {
+      "label": "Knowledge / RAG",
+      "query": "RAG agent in:name,description stars:>1000 archived:false",
+      "keywords": ["rag", "retrieval", "knowledge", "graph", "agent"]
+    },
+    "Agent Skills": {
+      "label": "Agent Skills",
+      "query": "\"agent skills\" in:name,description stars:>1000 archived:false",
+      "keywords": ["skill", "agent", "SKILL.md", "tool", "workflow"]
+    },
+    "MCP": {
+      "label": "MCP / Tool Infrastructure",
+      "query": "MCP in:name,description stars:>500 archived:false",
+      "keywords": ["mcp", "model context protocol", "server", "gateway", "registry"]
+    },
+    "Agent Protocol": {
+      "label": "Agent Interoperability Protocol",
+      "query": "\"agent protocol\" in:name,description stars:>100 archived:false",
+      "keywords": ["protocol", "agent", "interoperability", "A2A", "AG-UI"]
+    },
+    "Multi-Agent": {
+      "label": "Multi-Agent Coordination",
+      "query": "multi-agent in:name,description stars:>500 archived:false",
+      "keywords": ["multi-agent", "coordination", "crew", "swarm", "message"]
+    },
+    "Sandbox": {
+      "label": "Sandbox / Code Execution",
+      "query": "\"agent sandbox\" in:name,description stars:>100 archived:false",
+      "keywords": ["sandbox", "isolation", "code execution", "runtime", "agent"]
+    },
+    "Browser Computer Use": {
+      "label": "Browser / Computer Use",
+      "query": "\"browser agent\" in:name,description stars:>500 archived:false",
+      "keywords": ["browser", "computer use", "automation", "playwright", "agent"]
+    },
+    "Model Gateway": {
+      "label": "Model Gateway / Routing",
+      "query": "\"AI gateway\" in:name,description stars:>500 archived:false",
+      "keywords": ["gateway", "routing", "model", "LLM", "fallback"]
+    },
+    "Observability": {
+      "label": "Agent Observability",
+      "query": "\"agent observability\" in:name,description stars:>100 archived:false",
+      "keywords": ["observability", "trace", "OpenTelemetry", "monitoring", "agent"]
+    },
+    "Evaluation": {
+      "label": "Agent Evaluation / Testing",
+      "query": "\"agent evaluation\" in:name,description stars:>100 archived:false",
+      "keywords": ["evaluation", "eval", "testing", "benchmark", "agent"]
+    },
+    "Security": {
+      "label": "Agent Security / Guardrails",
+      "query": "\"agent security\" in:name,description stars:>100 archived:false",
+      "keywords": ["security", "guardrail", "red team", "prompt injection", "agent"]
+    },
+    "Identity Authorization": {
+      "label": "Identity / Authorization",
+      "query": "\"agent identity\" in:name,description stars:>50 archived:false",
+      "keywords": ["identity", "authorization", "OAuth", "permission", "agent"]
+    },
+    "HITL UI": {
+      "label": "HITL / Agent UI",
+      "query": "\"agent UI\" in:name,description stars:>100 archived:false",
+      "keywords": ["agent UI", "HITL", "frontend", "generative UI", "approval"]
+    },
+    "Harness Platform": {
+      "label": "Agent Harness / Full Platform",
+      "query": "\"agent harness\" in:name,description stars:>500 archived:false",
+      "keywords": ["harness", "coding agent", "runtime", "platform", "agent"]
+    }
+  }
+}
+

@@ -1,0 +1,960 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>AI Agent 开源技术周榜 · 2026-08-05</title>
+<style>
+.list-head{grid-template-columns:30px minmax(150px,1fr) 58px 70px 68px 58px !important;gap:8px;padding:0 8px 7px 0 !important}.list-head span:nth-child(n+3){text-align:right}.list-head .head-rank{text-align:center}@media(max-width:650px){.list-head{grid-template-columns:25px minmax(110px,1fr) 52px 62px 62px 54px !important}}
+:root{--bg:#08111f;--panel:#101d31;--panel-2:#14243b;--line:#243752;--text:#edf4ff;--muted:#8fa3bd;--accent:#73a7ff;--teal:#49d6bd;--orange:#ffbd69;--danger:#ff7f96;--shadow:0 20px 60px rgba(0,0,0,.22)}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 85% -10%,#1a3157 0,#08111f 42%);color:var(--text);font:14px/1.5 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif}a{color:inherit;text-decoration:none}.shell{max-width:1480px;margin:auto;padding:36px 30px 80px}.topbar{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;margin-bottom:30px}.eyebrow{color:var(--teal);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}h1{font-size:clamp(30px,4vw,52px);line-height:1.08;margin:8px 0 12px;letter-spacing:-.045em}.subtitle{color:var(--muted);max-width:680px;margin:0}.date-pill{border:1px solid var(--line);background:rgba(16,29,49,.72);padding:12px 16px;border-radius:14px;min-width:160px;text-align:right;box-shadow:var(--shadow)}.date-pill strong{display:block;font-size:20px}.date-pill span{color:var(--muted);font-size:12px}.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:28px}.kpi{background:linear-gradient(145deg,rgba(20,36,59,.96),rgba(12,24,41,.96));border:1px solid var(--line);border-radius:16px;padding:17px 18px;box-shadow:var(--shadow)}.kpi-label{color:var(--muted);font-size:12px}.kpi-value{font-size:28px;font-weight:750;letter-spacing:-.04em;margin-top:5px}.kpi-hint{font-size:11px;color:var(--teal);margin-top:2px}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:18px;position:sticky;top:0;z-index:3;padding:12px 0;background:linear-gradient(#08111f 74%,transparent)}.segmented,.filters{display:flex;gap:7px;flex-wrap:wrap}button{font:inherit;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer;transition:.2s}button:hover,button.active{color:var(--text);border-color:var(--accent);background:#1b3152}.module-chip{display:inline-flex;align-items:center;gap:8px;color:hsl(var(--chip-hue) 68% 76%);border-color:hsl(var(--chip-hue) 55% 46% / .62);background:hsl(var(--chip-hue) 48% 20% / .34)}.module-chip::before{content:"";width:7px;height:7px;border-radius:50%;background:hsl(var(--chip-hue) 82% 65%);box-shadow:0 0 10px hsl(var(--chip-hue) 82% 60% / .42);flex:none}.module-chip:hover{color:hsl(var(--chip-hue) 90% 88%);border-color:hsl(var(--chip-hue) 78% 63%);background:hsl(var(--chip-hue) 58% 27% / .56)}.module-chip.active{color:#fff;border-color:hsl(var(--chip-hue) 88% 68%);background:linear-gradient(135deg,hsl(var(--chip-hue) 62% 34% / .88),hsl(var(--chip-hue) 48% 24% / .9));box-shadow:0 0 0 1px hsl(var(--chip-hue) 80% 62% / .15),0 8px 20px hsl(var(--chip-hue) 70% 15% / .24)}.toolbar-note{color:var(--muted);font-size:12px}.modules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.module-card{background:rgba(16,29,49,.9);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow);min-width:0}.module-card.hidden{display:none}.module-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:14px}.module-head h2{font-size:18px;margin:0 0 4px}.module-head p{color:var(--muted);font-size:12px;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:480px}.module-index{color:var(--accent);font:700 11px ui-monospace,monospace;margin-right:8px}.module-count{color:var(--muted);font-size:11px;white-space:nowrap;border:1px solid var(--line);border-radius:999px;padding:5px 8px}.list-head{display:grid;grid-template-columns:minmax(170px,1fr) 60px 72px 72px 62px;gap:8px;color:#68809e;font-size:10px;text-transform:uppercase;letter-spacing:.08em;padding:0 8px 7px 10px}.ranking-momentum{display:none}body.mode-momentum .ranking-composite{display:none}body.mode-momentum .ranking-momentum{display:block}.rank-item{display:grid;grid-template-columns:30px minmax(150px,1fr) 58px 70px 68px 58px;gap:8px;align-items:center;border-top:1px solid rgba(36,55,82,.64);padding:11px 8px 11px 0;min-width:0}.rank-item:first-child{border-top:0}.rank-number{font:700 15px ui-monospace,monospace;color:#7187a4;text-align:center}.rank-1 .rank-number{color:#ffd36c}.rank-2 .rank-number{color:#c5d6ef}.rank-3 .rank-number{color:#cf9e70}.rank-main{min-width:0}.rank-title{display:flex;align-items:center;gap:7px;min-width:0}.rank-title a{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rank-title a:hover{color:var(--accent)}.priority{font-size:9px;padding:2px 5px;border-radius:4px;background:#22334b;color:#9bb1d0;flex:none}.priority-p0{background:rgba(73,214,189,.12);color:var(--teal)}.priority-p1{background:rgba(115,167,255,.12);color:var(--accent)}.rank-meta{display:flex;gap:8px;color:#7187a4;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}.score-track{height:3px;background:#20314a;border-radius:9px;margin-top:7px;overflow:hidden}.score-track span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--accent),var(--teal))}.rank-metric,.rank-score{text-align:right;min-width:0}.rank-metric strong,.rank-score strong{display:block;font-size:12px;white-space:nowrap}.rank-metric small,.rank-score small{display:block;color:#7187a4;font-size:9px;margin-top:2px}.rank-metric.positive strong{color:var(--teal)}.rank-metric.muted strong{color:#8497b1}.rank-score strong{color:var(--orange)}.empty-state{color:var(--muted);font-size:12px;padding:17px 8px;border-top:1px solid rgba(36,55,82,.64)}.watchlist{margin-top:28px;background:rgba(16,29,49,.72);border:1px solid var(--line);border-radius:18px;padding:20px}.watch-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}.watch-head h2{margin:0;font-size:18px}.watch-head span{font-size:12px;color:var(--muted)}.watch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.watch-item{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:rgba(20,36,59,.65);min-width:0}.watch-item:hover{border-color:var(--accent)}.watch-item span,.watch-item small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.watch-item span{font-weight:650}.watch-item small{color:var(--muted);font-size:10px;margin-top:3px}footer{display:flex;justify-content:space-between;gap:16px;color:#7187a4;font-size:11px;margin-top:28px;padding-top:16px;border-top:1px solid var(--line)}@media(max-width:1050px){.kpis{grid-template-columns:repeat(3,1fr)}.modules{grid-template-columns:1fr}}@media(max-width:650px){.shell{padding:24px 14px 50px}.topbar{display:block}.date-pill{margin-top:18px;text-align:left}.kpis{grid-template-columns:repeat(2,1fr)}.kpi-value{font-size:23px}.list-head{grid-template-columns:minmax(120px,1fr) 52px 62px 62px 54px}.rank-item{grid-template-columns:25px minmax(110px,1fr) 52px 62px 62px 54px;gap:5px;padding-right:0}.rank-meta span:nth-child(2){display:none}.rank-metric strong,.rank-score strong{font-size:10px}.watch-grid{grid-template-columns:1fr}footer{display:block}footer span{display:block;margin-top:5px}}
+</style></head><body><main class="shell">
+<header class="topbar"><div><div class="eyebrow">AI Agent Open Source Intelligence</div><h1>Agent 技术开源周榜</h1><p class="subtitle">把 18 个核心技术模块的开源项目放在同一张地图上，用社区热度、周增速和架构相关度看清本周变化。</p></div><div class="date-pill"><strong>2026-08-05</strong><span>已对比 首期基线 的快照，增量按 7 天标准化</span></div></header>
+<section class="kpis"><div class="kpi"><div class="kpi-label">覆盖模块</div><div class="kpi-value">18</div><div class="kpi-hint">核心 Agent 技术层</div></div><div class="kpi"><div class="kpi-label">榜单项目</div><div class="kpi-value">78</div><div class="kpi-hint">人工策展候选池</div></div><div class="kpi"><div class="kpi-label">总 Stars</div><div class="kpi-value">2.88m</div><div class="kpi-hint">Top 5 汇总</div></div><div class="kpi"><div class="kpi-label">标准化周增量</div><div class="kpi-value">基线</div><div class="kpi-hint">按 7 天口径</div></div><div class="kpi"><div class="kpi-label">刷新健康度</div><div class="kpi-value">100%</div><div class="kpi-hint">70 个项目近期活跃</div></div></section>
+<div class="toolbar"><div class="segmented"><button class="mode-btn active" data-mode="composite">综合榜</button><button class="mode-btn" data-mode="momentum">本周增长榜</button></div><div class="filters"><button class="filter-chip active" data-filter="all">全部模块</button><button class="filter-chip module-chip" data-filter="Agent Runtime" style="--chip-hue:198">Agent Runtime / SDK</button><button class="filter-chip module-chip" data-filter="Durable Execution" style="--chip-hue:219">Durable Execution</button><button class="filter-chip module-chip" data-filter="Context Manager" style="--chip-hue:252">Context Manager</button><button class="filter-chip module-chip" data-filter="Agent Memory" style="--chip-hue:278">Agent Memory</button><button class="filter-chip module-chip" data-filter="Knowledge RAG" style="--chip-hue:314">Knowledge / RAG</button><button class="filter-chip module-chip" data-filter="Agent Skills" style="--chip-hue:346">Agent Skills</button><button class="filter-chip module-chip" data-filter="MCP" style="--chip-hue:16">MCP / Tool Infrastructure</button><button class="filter-chip module-chip" data-filter="Agent Protocol" style="--chip-hue:38">Agent Interoperability Protocol</button><button class="filter-chip module-chip" data-filter="Multi-Agent" style="--chip-hue:68">Multi-Agent Coordination</button><button class="filter-chip module-chip" data-filter="Sandbox" style="--chip-hue:104">Sandbox / Code Execution</button><button class="filter-chip module-chip" data-filter="Browser Computer Use" style="--chip-hue:142">Browser / Computer Use</button><button class="filter-chip module-chip" data-filter="Model Gateway" style="--chip-hue:168">Model Gateway / Routing</button><button class="filter-chip module-chip" data-filter="Observability" style="--chip-hue:188">Agent Observability</button><button class="filter-chip module-chip" data-filter="Evaluation" style="--chip-hue:230">Agent Evaluation / Testing</button><button class="filter-chip module-chip" data-filter="Security" style="--chip-hue:266">Agent Security / Guardrails</button><button class="filter-chip module-chip" data-filter="Identity Authorization" style="--chip-hue:300">Identity / Authorization</button><button class="filter-chip module-chip" data-filter="HITL UI" style="--chip-hue:8">HITL / Agent UI</button><button class="filter-chip module-chip" data-filter="Harness Platform" style="--chip-hue:52">Agent Harness / Full Platform</button></div><span class="toolbar-note">点击项目名打开 GitHub · 评分条越长越靠前</span></div>
+<section class="modules"><section class="module-card" data-module="Agent Runtime" data-label="Agent Runtime / SDK">
+      <div class="module-head"><div><span class="module-index">01</span><h2>Agent Runtime / SDK</h2><p>有状态可恢复 Agent Runtime 的首选源码样本</p></div><span class="module-count">5 个样本</span></div>
+      <div class="list-head"><span class="head-rank">排名</span><span>项目</span><span>Stars</span><span>周增量</span><span>周增速</span><span>评分</span></div>
+      <div class="ranking-list ranking-composite"><article class="rank-item rank-1" data-score="97.13">
+      <div class="rank-number">01</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/langchain-ai/langgraph" target="_blank" rel="noreferrer">LangGraph</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>MIT</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:97.1%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>38.9k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>97.1</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-2" data-score="96.17">
+      <div class="rank-number">02</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/openai/openai-agents-python" target="_blank" rel="noreferrer">OpenAI Agents SDK Python</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>MIT</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:96.2%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>28.4k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>96.2</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-3" data-score="95.26">
+      <div class="rank-number">03</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/google/adk-python" target="_blank" rel="noreferrer">Google ADK Python</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>Apache-2.0</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:95.3%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>21.0k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>95.3</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-4" data-score="93.70">
+      <div class="rank-number">04</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/microsoft/agent-framework" target="_blank" rel="noreferrer">Microsoft Agent Framework</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>需复核</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:93.7%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>12.6k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>93.7</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-5" data-score="88.27">
+      <div class="rank-number">05</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/crewAIInc/crewAI" target="_blank" rel="noreferrer">CrewAI</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>MIT</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:88.3%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>56.6k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>88.3</strong><small>综合分</small></div>
+    </article></div>
+      <div class="ranking-list ranking-momentum"><div class="empty-state">首期基线已建立，下一次刷新后生成真实增长榜。</div></div>
+    </section><section class="module-card" data-module="Durable Execution" data-label="Durable Execution">
+      <div class="module-head"><div><span class="module-index">02</span><h2>Durable Execution</h2><p>验证状态恢复与业务副作用一致性</p></div><span class="module-count">3 个样本</span></div>
+      <div class="list-head"><span class="head-rank">排名</span><span>项目</span><span>Stars</span><span>周增量</span><span>周增速</span><span>评分</span></div>
+      <div class="ranking-list ranking-composite"><article class="rank-item rank-1" data-score="95.41">
+      <div class="rank-number">01</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/temporalio/temporal" target="_blank" rel="noreferrer">Temporal</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Supporting</span><span>MIT</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:95.4%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>22.1k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>95.4</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-2" data-score="80.40">
+      <div class="rank-number">02</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/restatedev/restate" target="_blank" rel="noreferrer">Restate</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Supporting</span><span>需复核</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:80.4%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>4.3k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>80.4</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-3" data-score="77.26">
+      <div class="rank-number">03</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/dbos-inc/dbos-transact-py" target="_blank" rel="noreferrer">DBOS Transact Python</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Supporting</span><span>MIT</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:77.3%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>1.5k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>77.3</strong><small>综合分</small></div>
+    </article></div>
+      <div class="ranking-list ranking-momentum"><div class="empty-state">首期基线已建立，下一次刷新后生成真实增长榜。</div></div>
+    </section><section class="module-card" data-module="Context Manager" data-label="Context Manager">
+      <div class="module-head"><div><span class="module-index">03</span><h2>Context Manager</h2><p>统一 Memory/Knowledge/Skills 的 Context Database</p></div><span class="module-count">5 个样本</span></div>
+      <div class="list-head"><span class="head-rank">排名</span><span>项目</span><span>Stars</span><span>周增量</span><span>周增速</span><span>评分</span></div>
+      <div class="ranking-list ranking-composite"><article class="rank-item rank-1" data-score="96.13">
+      <div class="rank-number">01</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/volcengine/OpenViking" target="_blank" rel="noreferrer">OpenViking</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>AGPL-3.0</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:96.1%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>28.0k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>96.1</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-2" data-score="95.05">
+      <div class="rank-number">02</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/mksglu/context-mode" target="_blank" rel="noreferrer">context-mode</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>需复核</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:95.0%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>19.6k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>95.0</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-3" data-score="90.77">
+      <div class="rank-number">03</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/Aider-AI/aider" target="_blank" rel="noreferrer">Aider</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-application</span><span>Apache-2.0</span><span>稳定</span></div>
+        <div class="score-track"><span style="width:90.8%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>47.9k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>90.8</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-4" data-score="83.84">
+      <div class="rank-number">04</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/continuedev/continue" target="_blank" rel="noreferrer">Continue</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Agent-application</span><span>Apache-2.0</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:83.8%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>35.3k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>83.8</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-5" data-score="68.73">
+      <div class="rank-number">05</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/trustgraph-ai/trustgraph" target="_blank" rel="noreferrer">TrustGraph</a><span class="priority priority-p2">P2</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>Apache-2.0</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:68.7%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>2.5k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>68.7</strong><small>综合分</small></div>
+    </article></div>
+      <div class="ranking-list ranking-momentum"><div class="empty-state">首期基线已建立，下一次刷新后生成真实增长榜。</div></div>
+    </section><section class="module-card" data-module="Agent Memory" data-label="Agent Memory">
+      <div class="module-head"><div><span class="module-index">04</span><h2>Agent Memory</h2><p>通用 Agent Memory Layer</p></div><span class="module-count">5 个样本</span></div>
+      <div class="list-head"><span class="head-rank">排名</span><span>项目</span><span>Stars</span><span>周增量</span><span>周增速</span><span>评分</span></div>
+      <div class="ranking-list ranking-composite"><article class="rank-item rank-1" data-score="98.57">
+      <div class="rank-number">01</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/mem0ai/mem0" target="_blank" rel="noreferrer">Mem0</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>Apache-2.0</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:98.6%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>62.6k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>98.6</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-2" data-score="96.32">
+      <div class="rank-number">02</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/topoteretes/cognee" target="_blank" rel="noreferrer">Cognee</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>Apache-2.0</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:96.3%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>29.8k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>96.3</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-3" data-score="95.67">
+      <div class="rank-number">03</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/letta-ai/letta" target="_blank" rel="noreferrer">Letta</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>Apache-2.0</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:95.7%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>24.1k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>95.7</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-4" data-score="83.18">
+      <div class="rank-number">04</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/MemTensor/MemOS" target="_blank" rel="noreferrer">MemOS</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>Apache-2.0</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:83.2%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>10.6k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>83.2</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-5" data-score="80.78">
+      <div class="rank-number">05</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/getzep/zep" target="_blank" rel="noreferrer">Zep</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>Apache-2.0</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:80.8%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>4.8k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>80.8</strong><small>综合分</small></div>
+    </article></div>
+      <div class="ranking-list ranking-momentum"><div class="empty-state">首期基线已建立，下一次刷新后生成真实增长榜。</div></div>
+    </section><section class="module-card" data-module="Knowledge RAG" data-label="Knowledge / RAG">
+      <div class="module-head"><div><span class="module-index">05</span><h2>Knowledge / RAG</h2><p>完整 RAG 工程链和 Context Layer</p></div><span class="module-count">5 个样本</span></div>
+      <div class="list-head"><span class="head-rank">排名</span><span>项目</span><span>Stars</span><span>周增量</span><span>周增速</span><span>评分</span></div>
+      <div class="ranking-list ranking-composite"><article class="rank-item rank-1" data-score="89.57">
+      <div class="rank-number">01</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/infiniflow/ragflow" target="_blank" rel="noreferrer">RAGFlow</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Full-platform</span><span>Apache-2.0</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:89.6%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>86.9k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>89.6</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-2" data-score="87.98">
+      <div class="rank-number">02</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/run-llama/llama_index" target="_blank" rel="noreferrer">LlamaIndex</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>MIT</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:88.0%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>51.4k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>88.0</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-3" data-score="87.10">
+      <div class="rank-number">03</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/HKUDS/LightRAG" target="_blank" rel="noreferrer">LightRAG</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>MIT</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:87.1%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>38.5k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>87.1</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-4" data-score="85.92">
+      <div class="rank-number">04</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/deepset-ai/haystack" target="_blank" rel="noreferrer">Haystack</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>Apache-2.0</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:85.9%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>26.1k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>85.9</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-5" data-score="83.83">
+      <div class="rank-number">05</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/microsoft/graphrag" target="_blank" rel="noreferrer">GraphRAG</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>MIT</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:83.8%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>35.3k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>83.8</strong><small>综合分</small></div>
+    </article></div>
+      <div class="ranking-list ranking-momentum"><div class="empty-state">首期基线已建立，下一次刷新后生成真实增长榜。</div></div>
+    </section><section class="module-card" data-module="Agent Skills" data-label="Agent Skills">
+      <div class="module-head"><div><span class="module-index">06</span><h2>Agent Skills</h2><p>Skill 驱动的软件工程方法</p></div><span class="module-count">5 个样本</span></div>
+      <div class="list-head"><span class="head-rank">排名</span><span>项目</span><span>Stars</span><span>周增量</span><span>周增速</span><span>评分</span></div>
+      <div class="ranking-list ranking-composite"><article class="rank-item rank-1" data-score="100.00">
+      <div class="rank-number">01</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/obra/superpowers" target="_blank" rel="noreferrer">Superpowers</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Reference</span><span>MIT</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:100.0%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>266.9k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>100.0</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-2" data-score="100.00">
+      <div class="rank-number">02</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/anthropics/skills" target="_blank" rel="noreferrer">Anthropic Skills</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Reference</span><span>需复核</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:100.0%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>166.4k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>100.0</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-3" data-score="95.65">
+      <div class="rank-number">03</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/agentskills/agentskills" target="_blank" rel="noreferrer">Agent Skills Specification</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Specification</span><span>Apache-2.0</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:95.7%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>23.9k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>95.7</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-4" data-score="89.39">
+      <div class="rank-number">04</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/addyosmani/agent-skills" target="_blank" rel="noreferrer">agent-skills</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Reference</span><span>MIT</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:89.4%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>81.7k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>89.4</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-5" data-score="86.29">
+      <div class="rank-number">05</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/ComposioHQ/composio" target="_blank" rel="noreferrer">Composio</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>MIT</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:86.3%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>29.5k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>86.3</strong><small>综合分</small></div>
+    </article></div>
+      <div class="ranking-list ranking-momentum"><div class="empty-state">首期基线已建立，下一次刷新后生成真实增长榜。</div></div>
+    </section><section class="module-card" data-module="MCP" data-label="MCP / Tool Infrastructure">
+      <div class="module-head"><div><span class="module-index">07</span><h2>MCP / Tool Infrastructure</h2><p>Python 官方 SDK</p></div><span class="module-count">5 个样本</span></div>
+      <div class="list-head"><span class="head-rank">排名</span><span>项目</span><span>Stars</span><span>周增量</span><span>周增速</span><span>评分</span></div>
+      <div class="ranking-list ranking-composite"><article class="rank-item rank-1" data-score="95.65">
+      <div class="rank-number">01</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/modelcontextprotocol/python-sdk" target="_blank" rel="noreferrer">MCP Python SDK</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>需复核</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:95.7%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>23.9k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>95.7</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-2" data-score="93.82">
+      <div class="rank-number">02</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/modelcontextprotocol/typescript-sdk" target="_blank" rel="noreferrer">MCP TypeScript SDK</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>需复核</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:93.8%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>13.1k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>93.8</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-3" data-score="92.63">
+      <div class="rank-number">03</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/modelcontextprotocol/modelcontextprotocol" target="_blank" rel="noreferrer">MCP Specification</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Specification</span><span>需复核</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:92.6%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>8.9k</strong><small>Stars</small></div>
+      <div class="rank-metric muted"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric muted"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>92.6</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-4" data-score="90.40">
+      <div class="rank-number">04</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/IBM/mcp-context-forge" target="_blank" rel="noreferrer">MCP Context Forge</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>Apache-2.0</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:90.4%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>4.2k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>90.4</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-5" data-score="89.65">
+      <div class="rank-number">05</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/modelcontextprotocol/servers" target="_blank" rel="noreferrer">MCP Servers</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Reference</span><span>需复核</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:89.7%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>89.2k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>89.7</strong><small>综合分</small></div>
+    </article></div>
+      <div class="ranking-list ranking-momentum"><div class="empty-state">首期基线已建立，下一次刷新后生成真实增长榜。</div></div>
+    </section><section class="module-card" data-module="Agent Protocol" data-label="Agent Interoperability Protocol">
+      <div class="module-head"><div><span class="module-index">08</span><h2>Agent Interoperability Protocol</h2><p>Agent 到 Agent 的远程互操作</p></div><span class="module-count">3 个样本</span></div>
+      <div class="list-head"><span class="head-rank">排名</span><span>项目</span><span>Stars</span><span>周增量</span><span>周增速</span><span>评分</span></div>
+      <div class="ranking-list ranking-composite"><article class="rank-item rank-1" data-score="95.81">
+      <div class="rank-number">01</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/a2aproject/A2A" target="_blank" rel="noreferrer">A2A</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Specification</span><span>Apache-2.0</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:95.8%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>25.2k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>95.8</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-2" data-score="94.26">
+      <div class="rank-number">02</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/ag-ui-protocol/ag-ui" target="_blank" rel="noreferrer">AG-UI</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Specification</span><span>MIT</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:94.3%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>15.1k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>94.3</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-3" data-score="79.00">
+      <div class="rank-number">03</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/modelcontextprotocol/ext-apps" target="_blank" rel="noreferrer">MCP Apps</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Specification</span><span>需复核</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:79.0%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>2.7k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>79.0</strong><small>综合分</small></div>
+    </article></div>
+      <div class="ranking-list ranking-momentum"><div class="empty-state">首期基线已建立，下一次刷新后生成真实增长榜。</div></div>
+    </section><section class="module-card" data-module="Multi-Agent" data-label="Multi-Agent Coordination">
+      <div class="module-head"><div><span class="module-index">09</span><h2>Multi-Agent Coordination</h2><p>国内多 Agent Runtime 代表</p></div><span class="module-count">3 个样本</span></div>
+      <div class="list-head"><span class="head-rank">排名</span><span>项目</span><span>Stars</span><span>周增量</span><span>周增速</span><span>评分</span></div>
+      <div class="ranking-list ranking-composite"><article class="rank-item rank-1" data-score="86.19">
+      <div class="rank-number">01</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/agentscope-ai/agentscope" target="_blank" rel="noreferrer">AgentScope</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>需复核</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:86.2%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>28.6k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>86.2</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-2" data-score="84.71">
+      <div class="rank-number">02</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/camel-ai/camel" target="_blank" rel="noreferrer">CAMEL</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>需复核</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:84.7%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>17.5k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>84.7</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-3" data-score="62.90">
+      <div class="rank-number">03</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/FoundationAgents/MetaGPT" target="_blank" rel="noreferrer">MetaGPT</a><span class="priority priority-p2">P2</span></div>
+        <div class="rank-meta"><span>Agent-application</span><span>MIT</span><span>沉寂</span></div>
+        <div class="score-track"><span style="width:62.9%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>69.7k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>62.9</strong><small>综合分</small></div>
+    </article></div>
+      <div class="ranking-list ranking-momentum"><div class="empty-state">首期基线已建立，下一次刷新后生成真实增长榜。</div></div>
+    </section><section class="module-card" data-module="Sandbox" data-label="Sandbox / Code Execution">
+      <div class="module-head"><div><span class="module-index">10</span><h2>Sandbox / Code Execution</h2><p>企业 Agent 云端安全执行环境</p></div><span class="module-count">5 个样本</span></div>
+      <div class="list-head"><span class="head-rank">排名</span><span>项目</span><span>Stars</span><span>周增量</span><span>周增速</span><span>评分</span></div>
+      <div class="ranking-list ranking-composite"><article class="rank-item rank-1" data-score="93.86">
+      <div class="rank-number">01</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/e2b-dev/E2B" target="_blank" rel="noreferrer">E2B</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>Apache-2.0</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:93.9%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>13.3k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>93.9</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-2" data-score="93.64">
+      <div class="rank-number">02</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/opensandbox-group/OpenSandbox" target="_blank" rel="noreferrer">OpenSandbox</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>Apache-2.0</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:93.6%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>12.4k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>93.6</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-3" data-score="92.32">
+      <div class="rank-number">03</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/NVIDIA/OpenShell" target="_blank" rel="noreferrer">OpenShell</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>Apache-2.0</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:92.3%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>8.0k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>92.3</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-4" data-score="92.00">
+      <div class="rank-number">04</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/daytonaio/daytona" target="_blank" rel="noreferrer">Daytona</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>需复核</span><span>稳定</span></div>
+        <div class="score-track"><span style="width:92.0%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>72.1k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>92.0</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-5" data-score="83.26">
+      <div class="rank-number">05</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/TencentCloud/CubeSandbox" target="_blank" rel="noreferrer">CubeSandbox</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>需复核</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:83.3%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>10.9k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>83.3</strong><small>综合分</small></div>
+    </article></div>
+      <div class="ranking-list ranking-momentum"><div class="empty-state">首期基线已建立，下一次刷新后生成真实增长榜。</div></div>
+    </section><section class="module-card" data-module="Browser Computer Use" data-label="Browser / Computer Use">
+      <div class="module-head"><div><span class="module-index">11</span><h2>Browser / Computer Use</h2><p>浏览器 Agent 主流实现</p></div><span class="module-count">5 个样本</span></div>
+      <div class="list-head"><span class="head-rank">排名</span><span>项目</span><span>Stars</span><span>周增量</span><span>周增速</span><span>评分</span></div>
+      <div class="ranking-list ranking-composite"><article class="rank-item rank-1" data-score="100.00">
+      <div class="rank-number">01</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/browser-use/browser-use" target="_blank" rel="noreferrer">Browser-use</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>MIT</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:100.0%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>107.9k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>100.0</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-2" data-score="95.63">
+      <div class="rank-number">02</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/browserbase/stagehand" target="_blank" rel="noreferrer">Stagehand</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>MIT</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:95.6%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>23.7k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>95.6</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-3" data-score="95.25">
+      <div class="rank-number">03</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/trycua/cua" target="_blank" rel="noreferrer">CUA</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>MIT</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:95.2%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>20.9k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>95.2</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-4" data-score="79.09">
+      <div class="rank-number">04</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/steel-dev/steel-browser" target="_blank" rel="noreferrer">Steel Browser</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>Apache-2.0</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:79.1%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>7.4k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>79.1</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-5" data-score="64.81">
+      <div class="rank-number">05</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/ServiceNow/BrowserGym" target="_blank" rel="noreferrer">BrowserGym</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>需复核</span><span>偏慢</span></div>
+        <div class="score-track"><span style="width:64.8%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>1.3k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>64.8</strong><small>综合分</small></div>
+    </article></div>
+      <div class="ranking-list ranking-momentum"><div class="empty-state">首期基线已建立，下一次刷新后生成真实增长榜。</div></div>
+    </section><section class="module-card" data-module="Model Gateway" data-label="Model Gateway / Routing">
+      <div class="module-head"><div><span class="module-index">12</span><h2>Model Gateway / Routing</h2><p>多模型统一入口与治理</p></div><span class="module-count">4 个样本</span></div>
+      <div class="list-head"><span class="head-rank">排名</span><span>项目</span><span>Stars</span><span>周增量</span><span>周增速</span><span>评分</span></div>
+      <div class="ranking-list ranking-composite"><article class="rank-item rank-1" data-score="98.22">
+      <div class="rank-number">01</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/BerriAI/litellm" target="_blank" rel="noreferrer">LiteLLM</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>需复核</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:98.2%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>55.6k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>98.2</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-2" data-score="77.23">
+      <div class="rank-number">02</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/diegosouzapw/OmniRoute" target="_blank" rel="noreferrer">OmniRoute</a><span class="priority priority-p2">P2</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>MIT</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:77.2%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>40.1k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>77.2</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-3" data-score="76.71">
+      <div class="rank-number">03</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/Portkey-AI/gateway" target="_blank" rel="noreferrer">Portkey Gateway</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>MIT</span><span>稳定</span></div>
+        <div class="score-track"><span style="width:76.7%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>12.6k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>76.7</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-4" data-score="71.90">
+      <div class="rank-number">04</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/katanemo/plano" target="_blank" rel="noreferrer">Plano</a><span class="priority priority-p2">P2</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>Apache-2.0</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:71.9%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>7.0k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>71.9</strong><small>综合分</small></div>
+    </article></div>
+      <div class="ranking-list ranking-momentum"><div class="empty-state">首期基线已建立，下一次刷新后生成真实增长榜。</div></div>
+    </section><section class="module-card" data-module="Observability" data-label="Agent Observability">
+      <div class="module-head"><div><span class="module-index">13</span><h2>Agent Observability</h2><p>自托管 AI Engineering 平台</p></div><span class="module-count">5 个样本</span></div>
+      <div class="list-head"><span class="head-rank">排名</span><span>项目</span><span>Stars</span><span>周增量</span><span>周增速</span><span>评分</span></div>
+      <div class="ranking-list ranking-composite"><article class="rank-item rank-1" data-score="96.59">
+      <div class="rank-number">01</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/langfuse/langfuse" target="_blank" rel="noreferrer">Langfuse</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>需复核</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:96.6%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>32.6k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>96.6</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-2" data-score="93.26">
+      <div class="rank-number">02</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/Arize-ai/phoenix" target="_blank" rel="noreferrer">Phoenix</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>需复核</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:93.3%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>10.9k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>93.3</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-3" data-score="85.27">
+      <div class="rank-number">03</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/comet-ml/opik" target="_blank" rel="noreferrer">Opik</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>Apache-2.0</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:85.3%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>21.1k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>85.3</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-4" data-score="78.99">
+      <div class="rank-number">04</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/openlit/openlit" target="_blank" rel="noreferrer">OpenLIT</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>需复核</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:79.0%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>2.7k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>79.0</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-5" data-score="75.07">
+      <div class="rank-number">05</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/traceloop/openllmetry" target="_blank" rel="noreferrer">OpenLLMetry</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>Apache-2.0</span><span>稳定</span></div>
+        <div class="score-track"><span style="width:75.1%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>7.4k</strong><small>Stars</small></div>
+      <div class="rank-metric muted"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric muted"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>75.1</strong><small>综合分</small></div>
+    </article></div>
+      <div class="ranking-list ranking-momentum"><div class="empty-state">首期基线已建立，下一次刷新后生成真实增长榜。</div></div>
+    </section><section class="module-card" data-module="Evaluation" data-label="Agent Evaluation / Testing">
+      <div class="module-head"><div><span class="module-index">14</span><h2>Agent Evaluation / Testing</h2><p>声明式评测与安全扫描</p></div><span class="module-count">5 个样本</span></div>
+      <div class="list-head"><span class="head-rank">排名</span><span>项目</span><span>Stars</span><span>周增量</span><span>周增速</span><span>评分</span></div>
+      <div class="ranking-list ranking-composite"><article class="rank-item rank-1" data-score="95.65">
+      <div class="rank-number">01</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/promptfoo/promptfoo" target="_blank" rel="noreferrer">Promptfoo</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>MIT</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:95.7%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>23.9k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>95.7</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-2" data-score="94.69">
+      <div class="rank-number">02</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/confident-ai/deepeval" target="_blank" rel="noreferrer">DeepEval</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>Apache-2.0</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:94.7%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>17.4k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>94.7</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-3" data-score="81.31">
+      <div class="rank-number">03</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/Giskard-AI/giskard-oss" target="_blank" rel="noreferrer">Giskard OSS</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>Apache-2.0</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:81.3%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>5.7k</strong><small>Stars</small></div>
+      <div class="rank-metric muted"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric muted"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>81.3</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-4" data-score="78.76">
+      <div class="rank-number">04</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/UKGovernmentBEIS/inspect_ai" target="_blank" rel="noreferrer">Inspect AI</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>MIT</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:78.8%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>2.5k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>78.8</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-5" data-score="76.43">
+      <div class="rank-number">05</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/langchain-ai/openevals" target="_blank" rel="noreferrer">OpenEvals</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>MIT</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:76.4%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>1.1k</strong><small>Stars</small></div>
+      <div class="rank-metric muted"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric muted"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>76.4</strong><small>综合分</small></div>
+    </article></div>
+      <div class="ranking-list ranking-momentum"><div class="empty-state">首期基线已建立，下一次刷新后生成真实增长榜。</div></div>
+    </section><section class="module-card" data-module="Security" data-label="Agent Security / Guardrails">
+      <div class="module-head"><div><span class="module-index">15</span><h2>Agent Security / Guardrails</h2><p>Agent Skill 供应链安全</p></div><span class="module-count">4 个样本</span></div>
+      <div class="list-head"><span class="head-rank">排名</span><span>项目</span><span>Stars</span><span>周增量</span><span>周增速</span><span>评分</span></div>
+      <div class="ranking-list ranking-composite"><article class="rank-item rank-1" data-score="94.07">
+      <div class="rank-number">01</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/NVIDIA/SkillSpector" target="_blank" rel="noreferrer">SkillSpector</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>Apache-2.0</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:94.1%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>14.2k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>94.1</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-2" data-score="90.40">
+      <div class="rank-number">02</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/microsoft/PyRIT" target="_blank" rel="noreferrer">PyRIT</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>MIT</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:90.4%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>4.2k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>90.4</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-3" data-score="81.86">
+      <div class="rank-number">03</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/NVIDIA-NeMo/Guardrails" target="_blank" rel="noreferrer">NeMo Guardrails</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>需复核</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:81.9%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>6.9k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>81.9</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-4" data-score="47.50">
+      <div class="rank-number">04</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/invariantlabs-ai/invariant" target="_blank" rel="noreferrer">Invariant</a><span class="priority priority-p2">P2</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>Apache-2.0</span><span>沉寂</span></div>
+        <div class="score-track"><span style="width:47.5%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>438</strong><small>Stars</small></div>
+      <div class="rank-metric muted"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric muted"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>47.5</strong><small>综合分</small></div>
+    </article></div>
+      <div class="ranking-list ranking-momentum"><div class="empty-state">首期基线已建立，下一次刷新后生成真实增长榜。</div></div>
+    </section><section class="module-card" data-module="Identity Authorization" data-label="Identity / Authorization">
+      <div class="module-head"><div><span class="module-index">16</span><h2>Identity / Authorization</h2><p>AI App 身份认证与授权底座</p></div><span class="module-count">3 个样本</span></div>
+      <div class="list-head"><span class="head-rank">排名</span><span>项目</span><span>Stars</span><span>周增量</span><span>周增速</span><span>评分</span></div>
+      <div class="ranking-list ranking-composite"><article class="rank-item rank-1" data-score="94.08">
+      <div class="rank-number">01</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/logto-io/logto" target="_blank" rel="noreferrer">Logto</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Supporting</span><span>需复核</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:94.1%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>14.3k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>94.1</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-2" data-score="91.21">
+      <div class="rank-number">02</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/openfga/openfga" target="_blank" rel="noreferrer">OpenFGA</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Supporting</span><span>Apache-2.0</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:91.2%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>5.5k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>91.2</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-3" data-score="84.05">
+      <div class="rank-number">03</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/casdoor/casdoor" target="_blank" rel="noreferrer">Casdoor</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Supporting</span><span>Apache-2.0</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:84.0%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>14.1k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>84.0</strong><small>综合分</small></div>
+    </article></div>
+      <div class="ranking-list ranking-momentum"><div class="empty-state">首期基线已建立，下一次刷新后生成真实增长榜。</div></div>
+    </section><section class="module-card" data-module="HITL UI" data-label="HITL / Agent UI">
+      <div class="module-head"><div><span class="module-index">17</span><h2>HITL / Agent UI</h2><p>Agent 前端和 AG-UI 实现</p></div><span class="module-count">3 个样本</span></div>
+      <div class="list-head"><span class="head-rank">排名</span><span>项目</span><span>Stars</span><span>周增量</span><span>周增速</span><span>评分</span></div>
+      <div class="ranking-list ranking-composite"><article class="rank-item rank-1" data-score="96.93">
+      <div class="rank-number">01</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/CopilotKit/CopilotKit" target="_blank" rel="noreferrer">CopilotKit</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>MIT</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:96.9%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>36.5k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>96.9</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-2" data-score="83.41">
+      <div class="rank-number">02</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/assistant-ui/assistant-ui" target="_blank" rel="noreferrer">assistant-ui</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Agent-native</span><span>MIT</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:83.4%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>11.4k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>83.4</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-3" data-score="76.34">
+      <div class="rank-number">03</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/humanlayer/humanlayer" target="_blank" rel="noreferrer">HumanLayer</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Agent-application</span><span>需复核</span><span>稳定</span></div>
+        <div class="score-track"><span style="width:76.3%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>11.2k</strong><small>Stars</small></div>
+      <div class="rank-metric muted"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric muted"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>76.3</strong><small>综合分</small></div>
+    </article></div>
+      <div class="ranking-list ranking-momentum"><div class="empty-state">首期基线已建立，下一次刷新后生成真实增长榜。</div></div>
+    </section><section class="module-card" data-module="Harness Platform" data-label="Agent Harness / Full Platform">
+      <div class="module-head"><div><span class="module-index">18</span><h2>Agent Harness / Full Platform</h2><p>终端 Agent 架构参考</p></div><span class="module-count">5 个样本</span></div>
+      <div class="list-head"><span class="head-rank">排名</span><span>项目</span><span>Stars</span><span>周增量</span><span>周增速</span><span>评分</span></div>
+      <div class="ranking-list ranking-composite"><article class="rank-item rank-1" data-score="100.00">
+      <div class="rank-number">01</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/anomalyco/opencode" target="_blank" rel="noreferrer">OpenCode</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-application</span><span>需复核</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:100.0%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>193.6k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>100.0</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-2" data-score="100.00">
+      <div class="rank-number">02</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/openai/codex" target="_blank" rel="noreferrer">Codex</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-application</span><span>需复核</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:100.0%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>104.1k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>100.0</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-3" data-score="99.44">
+      <div class="rank-number">03</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/OpenHands/OpenHands" target="_blank" rel="noreferrer">OpenHands</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-application</span><span>需复核</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:99.4%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>83.2k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>99.4</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-4" data-score="99.30">
+      <div class="rank-number">04</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/bytedance/deer-flow" target="_blank" rel="noreferrer">DeerFlow</a><span class="priority priority-p0">P0</span></div>
+        <div class="rank-meta"><span>Agent-application</span><span>MIT</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:99.3%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>79.3k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>99.3</strong><small>综合分</small></div>
+    </article><article class="rank-item rank-5" data-score="90.00">
+      <div class="rank-number">05</div>
+      <div class="rank-main">
+        <div class="rank-title"><a href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noreferrer">Hermes Agent</a><span class="priority priority-p1">P1</span></div>
+        <div class="rank-meta"><span>Agent-application</span><span>MIT</span><span>活跃</span></div>
+        <div class="score-track"><span style="width:90.0%"></span></div>
+      </div>
+      <div class="rank-metric"><strong>225.8k</strong><small>Stars</small></div>
+      <div class="rank-metric positive"><strong>基线</strong><small>周增量</small></div>
+      <div class="rank-metric positive"><strong>—</strong><small>周增速</small></div>
+      <div class="rank-score"><strong>90.0</strong><small>综合分</small></div>
+    </article></div>
+      <div class="ranking-list ranking-momentum"><div class="empty-state">首期基线已建立，下一次刷新后生成真实增长榜。</div></div>
+    </section></section><section class="watchlist"><div class="watch-head"><h2>新发现观察池</h2><span>82 个候选 · 仅作研究线索，不自动进入正式榜单</span></div><div class="watch-grid"><a class="watch-item" href="https://github.com/IAAR-Shanghai/Awesome-AI-Memory" target="_blank" rel="noreferrer"><span>IAAR-Shanghai/Awesome-AI-Memory</span><small>Agent Memory · 1136 Stars · 匹配度 3</small></a><a class="watch-item" href="https://github.com/NirDiamant/Agent_Memory_Techniques" target="_blank" rel="noreferrer"><span>NirDiamant/Agent_Memory_Techniques</span><small>Agent Memory · 839 Stars · 匹配度 3</small></a><a class="watch-item" href="https://github.com/swarmclawai/swarmvault" target="_blank" rel="noreferrer"><span>swarmclawai/swarmvault</span><small>Agent Memory · 642 Stars · 匹配度 3</small></a><a class="watch-item" href="https://github.com/vectorize-io/hindsight" target="_blank" rel="noreferrer"><span>vectorize-io/hindsight</span><small>Agent Memory · 19116 Stars · 匹配度 2</small></a><a class="watch-item" href="https://github.com/TencentCloud/TencentDB-Agent-Memory" target="_blank" rel="noreferrer"><span>TencentCloud/TencentDB-Agent-Memory</span><small>Agent Memory · 14527 Stars · 匹配度 2</small></a><a class="watch-item" href="https://github.com/win4r/openclaw-a2a-gateway" target="_blank" rel="noreferrer"><span>win4r/openclaw-a2a-gateway</span><small>Agent Interoperability Protocol · 551 Stars · 匹配度 3</small></a><a class="watch-item" href="https://github.com/agi-inc/agent-protocol" target="_blank" rel="noreferrer"><span>agi-inc/agent-protocol</span><small>Agent Interoperability Protocol · 1458 Stars · 匹配度 2</small></a><a class="watch-item" href="https://github.com/langchain-ai/agent-protocol" target="_blank" rel="noreferrer"><span>langchain-ai/agent-protocol</span><small>Agent Interoperability Protocol · 644 Stars · 匹配度 2</small></a><a class="watch-item" href="https://github.com/OTA-Tech-AI/web-agent-protocol" target="_blank" rel="noreferrer"><span>OTA-Tech-AI/web-agent-protocol</span><small>Agent Interoperability Protocol · 505 Stars · 匹配度 2</small></a><a class="watch-item" href="https://github.com/mahonzhan/awesome-agent-harness" target="_blank" rel="noreferrer"><span>mahonzhan/awesome-agent-harness</span><small>Agent Interoperability Protocol · 245 Stars · 匹配度 2</small></a><a class="watch-item" href="https://github.com/Yuan-lab-LLM/ClawManager" target="_blank" rel="noreferrer"><span>Yuan-lab-LLM/ClawManager</span><small>Agent Runtime / SDK · 1920 Stars · 匹配度 3</small></a><a class="watch-item" href="https://github.com/agentscope-ai/agentscope-runtime" target="_blank" rel="noreferrer"><span>agentscope-ai/agentscope-runtime</span><small>Agent Runtime / SDK · 846 Stars · 匹配度 3</small></a></div></section>
+<footer><span>数据源：GitHub API / 公开仓库页面 · 当前快照 2026-08-05</span><span>排名是研究辅助信号，不代表生产成熟度、许可证结论或采用建议。</span></footer></main>
+<script>const body=document.body;document.querySelectorAll('.mode-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.mode-btn').forEach(item=>item.classList.remove('active'));btn.classList.add('active');body.classList.toggle('mode-momentum',btn.dataset.mode==='momentum')}));document.querySelectorAll('.filter-chip').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.filter-chip').forEach(item=>item.classList.remove('active'));btn.classList.add('active');const filter=btn.dataset.filter;document.querySelectorAll('.module-card').forEach(card=>card.classList.toggle('hidden',filter!=='all'&&card.dataset.module!==filter))}));</script></body></html>
