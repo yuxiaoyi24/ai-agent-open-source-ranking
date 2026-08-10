@@ -22,6 +22,10 @@ STAR_PATTERN = re.compile(r'aria-label="([0-9,.]+) users starred this repository
 CANONICAL_PATTERN = re.compile(
     r'<meta property="og:url" content="https://github\.com/([^"/]+/[^"/]+)"'
 )
+DESCRIPTION_PATTERN = re.compile(r'<meta property="og:description" content="([^"]*)"')
+GITHUB_DESCRIPTION_SUFFIX = re.compile(
+    r"\s*Contribute to .+? development by creating an account on GitHub\.\s*$"
+)
 
 
 class GitHubClient:
@@ -78,6 +82,7 @@ class GitHubClient:
                     r{index}: repository(owner: {owner}, name: {name}) {{
                       nameWithOwner
                       url
+                      description
                       stargazerCount
                       isArchived
                       pushedAt
@@ -117,6 +122,7 @@ class GitHubClient:
                     archived=bool(item.get("isArchived")),
                     license=(item.get("licenseInfo") or {}).get("spdxId") or project.license,
                     provider="graphql",
+                    description=(item.get("description") or "").strip() or None,
                 )
         return states
 
@@ -143,6 +149,12 @@ class GitHubClient:
         canonical_slug = html.unescape(canonical_match.group(1)) if canonical_match else project.slug
         canonical_repo = "https://github.com/{}".format(canonical_slug)
         archived = "This repository was archived" in page or "is archived by the owner" in page
+        description_match = DESCRIPTION_PATTERN.search(page)
+        description = None
+        if description_match:
+            description = GITHUB_DESCRIPTION_SUFFIX.sub(
+                "", html.unescape(description_match.group(1))
+            ).strip() or None
 
         pushed_at = None
         head_oid = None
@@ -170,6 +182,7 @@ class GitHubClient:
             archived=archived,
             license=project.license,
             provider="html",
+            description=description,
         )
 
     def discover(

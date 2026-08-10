@@ -30,7 +30,12 @@ from agent_landscape.core import (  # noqa: E402
     top_by_module,
 )
 from agent_landscape.dashboard import render_dashboard  # noqa: E402
-from agent_landscape.github_client import CANONICAL_PATTERN, GitHubClient  # noqa: E402
+from agent_landscape.github_client import (  # noqa: E402
+    CANONICAL_PATTERN,
+    DESCRIPTION_PATTERN,
+    GITHUB_DESCRIPTION_SUFFIX,
+    GitHubClient,
+)
 
 
 class CoreTests(unittest.TestCase):
@@ -73,6 +78,7 @@ class CoreTests(unittest.TestCase):
             archived=False,
             license="MIT",
             provider="test",
+            description="An example agent runtime.",
         )
         ranked = rank_projects(
             projects=[self.project],
@@ -88,6 +94,7 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(70, ranked.star_delta)
         self.assertEqual(70.0, ranked.weekly_star_delta)
         self.assertTrue(ranked.head_changed)
+        self.assertEqual("An example agent runtime.", ranked.description)
         self.assertIsNotNone(ranked.momentum_score)
         self.assertTrue(math.isclose(7.0, ranked.weekly_growth_rate))
 
@@ -312,6 +319,16 @@ class GitHubClientTests(unittest.TestCase):
         match = CANONICAL_PATTERN.search(page)
         self.assertIsNotNone(match)
         self.assertEqual("langchain-ai/langmem", match.group(1))
+
+    def test_html_description_removes_github_suffix(self) -> None:
+        page = (
+            '<meta property="og:description" content="Build resilient agents. '
+            'Contribute to langchain-ai/langgraph development by creating an account on GitHub." />'
+        )
+        match = DESCRIPTION_PATTERN.search(page)
+        self.assertIsNotNone(match)
+        description = GITHUB_DESCRIPTION_SUFFIX.sub("", match.group(1)).strip()
+        self.assertEqual("Build resilient agents.", description)
 
     def test_keyword_match_is_case_insensitive(self) -> None:
         score = GitHubClient._keyword_match(

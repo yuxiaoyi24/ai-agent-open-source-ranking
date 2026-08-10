@@ -54,6 +54,7 @@ class RepositoryState:
     archived: bool
     license: Optional[str]
     provider: str
+    description: Optional[str] = None
     error: Optional[str] = None
 
 
@@ -68,6 +69,7 @@ class RankedProject:
     kind: str
     tags: str
     architect_note: str
+    description: Optional[str]
     stars: int
     previous_stars: int
     star_delta: int
@@ -251,6 +253,7 @@ def rank_projects(
                 kind=project.kind,
                 tags=project.tags,
                 architect_note=project.architect_note,
+                description=state.description,
                 stars=state.stars,
                 previous_stars=previous_stars,
                 star_delta=raw_delta,
