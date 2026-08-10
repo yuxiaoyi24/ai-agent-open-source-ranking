@@ -1,0 +1,9 @@
+<view class="page">
+  <view class="eyebrow">SCORING MODEL</view>
+  <view class="title">评分说明</view>
+  <view class="intro">榜单是研究辅助信号，不等同于生产成熟度或采用建议。每周抓取 GitHub 公开仓库数据，再按统一口径计算。</view>
+  <view class="formula-card"><text class="formula-title">有历史快照时</text><text class="formula">综合分 = 架构相关度 × 30% + 社区热度 × 20% + 周增量 × 20% + 周增速 × 10% + 活跃度 × 15% + 健康度 × 5%</text></view>
+  <view class="formula-card"><text class="formula-title">首期没有历史快照时</text><text class="formula">综合分 = 架构相关度 × 40% + 社区热度 × 35% + 活跃度 × 20% + 健康度 × 5%</text></view>
+  <view class="formula-card"><text class="formula-title">本周增长榜</text><text class="formula">动量分更重视周增量与周增速，只展示检测到正向 Stars 增长的项目。</text></view>
+  <view class="source">数据源：GitHub API、公开仓库页面与项目维护记录。许可证显示“需复核”时，不代表可以直接用于企业生产。</view>
+</view>

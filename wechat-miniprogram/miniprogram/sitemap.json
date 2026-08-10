@@ -1,0 +1,4 @@
+{
+  "desc": "AI Agent 开源技术周榜",
+  "rules": [{ "action": "allow", "page": "*" }]
+}

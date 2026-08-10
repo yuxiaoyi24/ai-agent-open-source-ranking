@@ -1,0 +1,23 @@
+.detail-top { display: flex; justify-content: space-between; }
+.back-label { color: #49d6bd; font-size: 22rpx; letter-spacing: 2rpx; }
+.detail-date { color: #8298b5; font-size: 21rpx; }
+.project-title { color: #f1f6ff; font-size: 64rpx; font-weight: 800; line-height: 1.15; margin-top: 28rpx; }
+.project-slug { color: #8298b5; font-family: monospace; font-size: 21rpx; margin-top: 12rpx; }
+.tag-row { display: flex; flex-wrap: wrap; gap: 12rpx; margin-top: 24rpx; }
+.tag { background: #14243b; border: 1rpx solid #263b5a; border-radius: 8rpx; color: #a8bad3; font-size: 20rpx; padding: 8rpx 12rpx; }
+.tag.accent { color: #49d6bd; }
+.score-card { align-items: center; background: linear-gradient(135deg, #172e4d, #102039); border: 1rpx solid #2d4b70; border-radius: 20rpx; display: flex; justify-content: space-between; margin-top: 32rpx; padding: 26rpx 22rpx; }
+.score-label { color: #9fb3ce; display: block; font-size: 20rpx; }
+.score-value { color: #ffbd69; display: block; font-size: 64rpx; font-weight: 800; margin-top: 4rpx; }
+.score-side { color: #8298b5; display: flex; flex-direction: column; font-size: 19rpx; gap: 8rpx; text-align: right; }
+.score-side text:last-child { color: #edf4ff; font-size: 25rpx; }
+.positive { color: #49d6bd !important; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12rpx; margin-top: 16rpx; }
+.stat { background: rgba(16, 29, 49, .9); border: 1rpx solid #263b5a; border-radius: 16rpx; padding: 20rpx 12rpx; text-align: center; }
+.stat-value { color: #edf4ff; display: block; font-size: 31rpx; font-weight: 700; }
+.stat-label { color: #8298b5; display: block; font-size: 18rpx; margin-top: 6rpx; }
+.detail-section { border-top: 1rpx solid #263b5a; margin-top: 34rpx; padding-top: 24rpx; }
+.section-title { color: #edf4ff; display: block; font-size: 30rpx; font-weight: 700; margin-bottom: 14rpx; }
+.note, .description { color: #a6b7cd; font-size: 25rpx; line-height: 1.7; }
+.copy-button { background: #1b3152; border: 1rpx solid #73a7ff; border-radius: 12rpx; color: #f1f6ff; font-size: 25rpx; margin: 38rpx 0 0; }
+.hint { color: #687f9d; font-size: 19rpx; line-height: 1.6; margin-top: 14rpx; text-align: center; }

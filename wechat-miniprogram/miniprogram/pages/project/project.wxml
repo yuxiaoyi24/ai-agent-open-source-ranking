@@ -1,0 +1,15 @@
+<view class="page" wx:if="{{project}}">
+  <view class="detail-top"><text class="back-label">项目详情</text><text class="detail-date">{{project.module}}</text></view>
+  <view class="project-title">{{project.project}}</view>
+  <view class="project-slug">{{project.slug}}</view>
+  <view class="tag-row"><text class="tag accent">{{project.priority}}</text><text class="tag">{{project.kind}}</text><text class="tag">{{project.license}}</text><text class="tag">{{project.activityLabel}}</text></view>
+
+  <view class="score-card"><view><text class="score-label">综合评分</text><text class="score-value">{{project.compositeLabel}}</text></view><view class="score-side"><text>本周增速</text><text class="positive">{{project.growthLabel}}</text></view><view class="score-side"><text>动量分</text><text>{{project.momentumLabel}}</text></view></view>
+
+  <view class="stats"><view class="stat"><text class="stat-value">{{project.starsLabel}}</text><text class="stat-label">GitHub Stars</text></view><view class="stat"><text class="stat-value positive">{{project.deltaLabel}}</text><text class="stat-label">周增量</text></view><view class="stat"><text class="stat-value">{{project.activityLabel}}</text><text class="stat-label">活跃度</text></view></view>
+
+  <view class="detail-section"><text class="section-title">架构判断</text><text class="note">{{project.architect_note || '暂无架构备注'}}</text></view>
+  <view class="detail-section"><text class="section-title">项目简介</text><text class="description">{{project.description || 'GitHub 项目暂未提供描述。'}}</text></view>
+  <button class="copy-button" bindtap="copyRepo">复制 GitHub 仓库地址</button>
+  <view class="hint">小程序中先复制链接，再在浏览器打开；后续可接入合规的外链承载页。</view>
+</view>

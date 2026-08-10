@@ -1,0 +1,7 @@
+.eyebrow { color: #49d6bd; font-size: 19rpx; letter-spacing: 3rpx; }
+.title { color: #f1f6ff; font-size: 64rpx; font-weight: 800; margin-top: 22rpx; }
+.intro, .source { color: #9db0c9; font-size: 25rpx; line-height: 1.7; margin-top: 20rpx; }
+.formula-card { background: rgba(16, 29, 49, .9); border: 1rpx solid #263b5a; border-radius: 18rpx; margin-top: 18rpx; padding: 24rpx; }
+.formula-title { color: #edf4ff; display: block; font-size: 28rpx; font-weight: 700; }
+.formula { color: #a6b7cd; display: block; font-size: 23rpx; line-height: 1.7; margin-top: 12rpx; }
+.source { border-top: 1rpx solid #263b5a; color: #7288a5; font-size: 21rpx; margin-top: 34rpx; padding-top: 22rpx; }

@@ -9,6 +9,7 @@
 - [Agent 核心技术开源全景（2026）](./agent-core-open-source-landscape-2026.md)：模块地图、核心项目、源码研究问题和 12 周路线。
 - [项目清单](./data/agent-open-source-projects.csv)：可按模块、优先级、Stars、License 和项目类型筛选。
 - [可视化周榜](./reports/weekly/latest.html)：用模块卡片、评分条和交互切换查看每个模块的 Top 5。
+- [微信小程序](./wechat-miniprogram/)：基于现有 AppID 的原生小程序，自动读取与 GitHub Pages 同源的最新周榜并提供离线缓存。
 - [每周动态榜单（Markdown）](./reports/weekly/latest.md)：每个模块的综合 Top 5、本周增长 Top 5 和新发现观察池。
 - [周榜工具说明](./docs/weekly-ranking-tool.md)：评分模型、运行命令、历史快照和自动化维护方式。
 
@@ -35,4 +36,4 @@ python3 scripts/update_agent_landscape.py --discover
 
 ## 在线发布
 
-`.github/workflows/publish.yml` 负责 GitHub Pages 发布：推送到 `main` 时发布现有 HTML；每周一 09:00（Asia/Shanghai）自动刷新 GitHub 数据、运行测试、保存历史快照并发布新版页面。也可以在 GitHub Actions 中手动触发刷新。
+`.github/workflows/publish.yml` 负责 GitHub Pages 发布：推送到 `main` 时发布现有 HTML；每周一 09:00（Asia/Shanghai）自动刷新 GitHub 数据、生成小程序 JSON、运行测试、保存历史快照并发布新版页面。小程序启动时读取同一份线上 JSON，不需要每周重新发版。也可以在 GitHub Actions 中手动触发刷新。

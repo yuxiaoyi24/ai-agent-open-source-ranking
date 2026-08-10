@@ -54,6 +54,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 scripts/update_agent_landscape.py --discover
 
+      - name: Build mini program data
+        if: github.event_name == 'schedule' || inputs.refresh
+        run: python3 scripts/build_miniprogram_data.py
+
       - name: Run tests
         if: github.event_name == 'schedule' || inputs.refresh
         run: python3 -m unittest discover -s tests -v
@@ -63,7 +67,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/rankings data/snapshots reports/weekly
+          git add data/miniprogram data/rankings data/snapshots reports/weekly wechat-miniprogram/miniprogram/data/rankings.js
           if ! git diff --cached --quiet; then
             git commit -m "chore: refresh weekly rankings $(TZ=Asia/Shanghai date +%F)"
             git push
@@ -71,8 +75,9 @@ jobs:
 
       - name: Prepare static site
         run: |
-          mkdir -p _site/history
+          mkdir -p _site/data _site/history
           cp reports/weekly/latest.html _site/index.html
+          cp data/miniprogram/latest.json _site/data/latest.json
           find reports/weekly -name '*-agent-open-source-ranking.html' -exec cp {} _site/history/ \;
           touch _site/.nojekyll
 

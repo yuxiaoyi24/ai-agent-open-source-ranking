@@ -8,7 +8,7 @@
 2. 保存日期快照，与上一期计算 Stars 增量、标准化周增量和周增速。
 3. 按 18 个模块生成“综合 Top 5”和“本周增长 Top 5”。
 4. 用模块查询发现新仓库，但只放入观察池，不自动污染正式榜单。
-5. 生成一个可直接打开的自包含 HTML 仪表盘，提供综合榜/增长榜切换和模块筛选。
+5. 生成一个可直接打开的自包含 HTML 仪表盘，并同步生成小程序运行时读取的紧凑 JSON。
 
 ## 2. 为什么不是直接搜 GitHub Top 5
 
@@ -107,11 +107,16 @@ reports/weekly/
 ├── YYYY-MM-DD-agent-open-source-ranking.html
 ├── latest.md
 └── latest.html
+
+data/miniprogram/
+└── latest.json                          # Pages 与小程序共享的最新数据
 ```
 
 快照必须保留，下一期依赖它计算增量。不要只保留 `latest.md`。
 
 `latest.html` 是面向研究和汇报的主入口：顶部 KPI 展示覆盖模块、榜单项目、Top 5 汇总 Stars、周增量和刷新健康度；中部模块卡片支持“综合榜 / 本周增长榜”和模块过滤；底部保留自动发现观察池。页面内的评分条是相对分数可视化，不是百分比概率。
+
+`data/miniprogram/latest.json` 与小程序安装包内的 `rankings.js` 由同一个构建脚本生成。GitHub Pages 将 JSON 发布为 `/data/latest.json`；小程序启动或下拉刷新时同步并缓存，失败时回退到上次缓存或内置快照。
 
 ## 7. 每周人工复核
 

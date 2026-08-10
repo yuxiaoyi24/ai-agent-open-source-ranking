@@ -1,0 +1,54 @@
+<view class="page">
+  <view class="hero">
+    <view class="eyebrow">AI AGENT OPEN SOURCE INTELLIGENCE</view>
+    <view class="hero-title">Agent 技术<br /><text class="hero-accent">开源周榜</text></view>
+    <view class="hero-subtitle">用 Stars、周增速与架构相关度，快速判断本周值得研究的开源项目。</view>
+    <view class="hero-meta"><text>更新 {{date}}</text><text>{{dataSourceLabel}}</text></view>
+  </view>
+
+  <view class="metric-grid">
+    <view class="metric"><text class="metric-label">覆盖模块</text><text class="metric-value">{{moduleCount}}</text><text class="metric-hint">核心技术层</text></view>
+    <view class="metric"><text class="metric-label">候选项目</text><text class="metric-value">{{projectCount}}</text><text class="metric-hint">人工策展池</text></view>
+    <view class="metric"><text class="metric-label">Top 5 Stars</text><text class="metric-value">{{totalStars}}</text><text class="metric-hint">模块榜单汇总</text></view>
+    <view class="metric"><text class="metric-label">周增量</text><text class="metric-value positive">{{totalDelta}}</text><text class="metric-hint">按 7 天口径</text></view>
+  </view>
+
+  <view class="section-head"><text class="section-title">本周榜单</text><text class="section-link" bindtap="onAboutTap">评分说明 ></text></view>
+  <view class="mode-tabs">
+    <button class="mode-tab {{mode === 'composite' ? 'active' : ''}}" data-mode="composite" bindtap="onModeTap">综合榜</button>
+    <button class="mode-tab {{mode === 'momentum' ? 'active' : ''}}" data-mode="momentum" bindtap="onModeTap">本周增长</button>
+  </view>
+
+  <scroll-view class="module-tabs" scroll-x="true" show-scrollbar="false">
+    <view class="module-tab-row">
+      <block wx:for="{{tabs}}" wx:key="key">
+        <view class="module-tab {{selectedModule === item.key ? 'active' : ''}}" style="--tab-color: {{item.color}};" data-key="{{item.key}}" bindtap="onModuleTap">
+          <view class="tab-dot" style="background: {{item.color}};"></view><text>{{item.label}}</text>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+
+  <view class="module-list">
+    <block wx:for="{{modules}}" wx:key="key">
+      <view class="module-card" style="border-left-color: {{item.color}};">
+        <view class="module-head"><view><text class="module-label">{{index + 1 < 10 ? '0' : ''}}{{index + 1}}</text><text class="module-title">{{item.label}}</text></view><text class="sample-count">{{item.count}} 个样本</text></view>
+        <view class="module-note">{{item.note}}</view>
+        <block wx:if="{{item.projects.length}}">
+          <block wx:for="{{item.projects}}" wx:key="slug">
+            <view class="rank-row" data-slug="{{item.slug}}" bindtap="onProjectTap">
+              <text class="rank-no {{index < 3 ? 'top' : ''}}">{{index + 1}}</text>
+              <view class="rank-main"><view class="rank-name">{{item.project}} <text class="priority">{{item.priority}}</text></view><view class="rank-meta">{{item.kind}} · {{item.license}} · {{item.activityLabel}}</view><view class="progress"><view style="width: {{item.scorePercent}}%; background: {{item.color}};"></view></view></view>
+              <view class="rank-metric"><text>{{item.starsLabel}}</text><text class="metric-caption">Stars</text></view>
+              <view class="rank-metric"><text class="{{item.positive ? 'positive' : 'muted'}}">{{item.growthLabel}}</text><text class="metric-caption">周增速</text></view>
+              <view class="rank-score"><text>{{item.scoreLabel}}</text><text class="metric-caption">{{mode === 'momentum' ? '动量' : '综合'}}</text></view>
+            </view>
+          </block>
+        </block>
+        <view wx:else class="empty">本期还没有可用的增长数据。</view>
+      </view>
+    </block>
+  </view>
+
+  <view class="footer"><text>{{candidateCount}} 个候选项目仅作研究线索</text><text>数据源：GitHub 公开仓库</text></view>
+</view>
