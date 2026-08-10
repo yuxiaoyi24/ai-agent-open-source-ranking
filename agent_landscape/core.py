@@ -428,7 +428,7 @@ def render_report(
                         candidate["url"],
                         candidate["stars"],
                         candidate["match_score"],
-                        candidate.get("description") or "无仓库描述",
+                        (candidate.get("description") or "无仓库描述").strip(),
                     )
                 )
         lines.append("")

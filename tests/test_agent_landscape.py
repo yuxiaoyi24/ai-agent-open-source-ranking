@@ -212,6 +212,28 @@ class CoreTests(unittest.TestCase):
         self.assertIn("本周增长 Top 5", report)
         self.assertIn("首期仅建立基线", report)
 
+    def test_report_strips_discovery_description_whitespace(self) -> None:
+        report = render_report(
+            date(2026, 8, 5),
+            None,
+            {"Agent Runtime": {"composite": [], "momentum": []}},
+            {"Agent Runtime": self.config["modules"]["Agent Runtime"]},
+            {
+                "Agent Runtime": [
+                    {
+                        "full_name": "Candidate/project",
+                        "url": "https://github.com/Candidate/project",
+                        "stars": 10,
+                        "match_score": 2,
+                        "description": "Description with trailing spaces  ",
+                    }
+                ]
+            },
+            [],
+        )
+        self.assertIn("Description with trailing spaces", report)
+        self.assertNotIn("Description with trailing spaces  ", report)
+
     def test_dashboard_contains_visual_controls_and_project_links(self) -> None:
         state = RepositoryState(
             slug=self.project.slug,
@@ -252,6 +274,12 @@ class CoreTests(unittest.TestCase):
         self.assertIn('<span class="head-rank">排名</span><span>项目</span>', dashboard)
         self.assertIn(
             "grid-template-columns:30px minmax(150px,1fr) 58px 70px 68px 58px",
+            dashboard,
+        )
+        self.assertIn(".filters{flex-wrap:nowrap", dashboard)
+        self.assertIn(".list-head{display:none !important}", dashboard)
+        self.assertIn(
+            "grid-template-columns:28px repeat(3,minmax(0,1fr)) 48px",
             dashboard,
         )
 
